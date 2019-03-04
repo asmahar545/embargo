@@ -1,0 +1,14 @@
+drupalup_simple_form.simple_form:
+  path: 'simple-form'
+  defaults:
+    _form: '\Drupal\drupalup_simple_form\Form\SimpleForm'
+    _title: 'Les embargos sur les armes'
+  requirements:
+    _permission: 'access content'
+drupalup_simple_form.simple_ajax_form:
+  path: 'simple-ajax-form'
+  defaults:
+    _form: '\Drupal\drupalup_simple_form\Form\SimpleAjaxForm'
+    _title: 'Les embargos sur les armes'
+  requirements:
+    _permission: 'access content'

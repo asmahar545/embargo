@@ -1,0 +1,20 @@
+name: Bootstrap Forms
+type: theme
+description: An intermediate theme for nicely styled bootstrap form markup.
+package: Core
+# version: VERSION
+# core: 8.x
+base theme: stable
+hidden: false
+
+libraries:
+  - bootstrap_forms/form-styling
+  - bootstrap_forms/bootstrap-scripts
+  - bootstrap_forms/popover
+  - bootstrap_forms/tooltip
+
+# Information added by Drupal.org packaging script on 2018-10-17
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'bootstrap_forms'
+datestamp: 1539811383

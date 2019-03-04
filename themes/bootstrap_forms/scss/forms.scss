@@ -1,0 +1,112 @@
+@import 'compass/css3';
+
+body {
+
+}
+
+
+.nav.nav-tabs {
+  margin:0 0 1em 0;
+}
+
+
+
+form {
+//  .container-inline div, .container-inline label {
+//    @include inline-block();
+//  }
+
+  // When labels are rendered as divs, match the styling.
+  div.control-label, div.as-label {
+    font-weight:bold;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    &.label {
+      &--left {
+        text-align:left;
+      }
+      &--right {
+        text-align:right;
+      }
+    }
+  }
+
+  .form-horizontal {
+    .control-label {
+      &.label {
+        &--left {
+          text-align:left;
+        }
+        &--right {
+          text-align:right;
+        }
+      }
+    }
+  }
+
+
+}
+
+
+
+.form-horizontal {
+  .control-label {
+    padding-bottom:7px;
+  }
+}
+
+
+// Placeholders
+input[type="text"], textarea {
+  @include input-placeholder {
+
+  }
+}
+
+textarea,
+.form-control,
+.form-select {
+  &.element--width-auto {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+}
+
+// Input
+.form-control {
+  // Remove box shadow
+  @include box-shadow(none);
+
+}
+
+// Help text
+.help-block {
+  font-size: 14px;
+}
+
+// checkboxes
+.form-type-radio,
+.form-type-checkbox {
+  label {
+    font-weight:400;
+  }
+}
+
+// Fieldsets
+.fieldset-wrapper {
+  div.description {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+  }
+}
+
+.form-required {
+  &:after {
+    content: '*';
+    margin: 0 0.5em 0 0;
+    display: inline-block;
+  }
+}

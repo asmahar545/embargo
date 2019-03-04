@@ -1,0 +1,592 @@
+<?php
+
+use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Template\Attribute;
+use Drupal\node\Entity\Node;
+
+use Drupal\Core\Render\Element;
+
+/**
+ * Make some modifications to elements defaults.
+ * @param array $info
+ */
+function  bootstrap_forms_element_info_alter(array &$info) {
+
+
+  // Change the way checkboxes are rendered by removing the trait and rendering as a form element.
+  foreach ( $info['checkboxes']['#pre_render'] as $key => $value) {
+    if((array_search('preRenderCompositeFormElement', $value)) !== false) {
+      unset( $info['checkboxes']['#pre_render'][$key]);
+    }
+  }
+  // Make checkboxes use form_element instead of fieldsets.
+  $info['checkboxes']['#theme_wrappers'] = array('options_fieldset','form_element');
+
+
+  // Add a
+  $info['checkboxes']['#process'][] = 'bootstrap_forms_preprocess_checkboxes';
+
+
+  // Change the way radios are rendered by removing the trait and rendering as a form element.
+  foreach ( $info['radios']['#pre_render'] as $key => $value) {
+    if((array_search('preRenderCompositeFormElement', $value)) !== false) {
+      unset( $info['radios']['#pre_render'][$key]);
+    }
+  }
+  // Make radios use form_element as well as fieldsets.
+  $info['radios']['#theme_wrappers'] = array('fieldset','form_element');
+  $info['radios']['#process'][] = 'bootstrap_forms_preprocess_radios';
+
+  // Swap the datelist theme wrapper to use form element's.
+  $info['datelist']['#theme_wrappers'] = array('form_element');
+
+  $info['webform_actions']['#theme_wrappers'] = array('form_element');
+
+}
+
+/**
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_form_element(&$variables) {
+
+  // Grab a reference to the element.
+  $element = &$variables['element'];
+
+  // Helper variable for the element type.
+  $type = $element['#type'];
+
+  // Helper variable for form type (Basic, Horizontal, Inline).
+  $form_type = isset($element['#form_type']) ? $element['#form_type'] : 'basic';
+
+  // If the form type is inline or basic then remove any reference to the grids.
+  if ($form_type != 'horizontal') {
+    unset($element['#element_grid']);
+    unset($element['#title_grid']);
+  }
+
+  // Checkboxes and Radios cannot have suffix/prefix tooltips.
+  if (in_array($type,array('checkbox','radio','radios','checkboxes'))) {
+    unset($element['#prefix_tooltip']);
+    unset($element['#suffix_tooltip']);
+    unset($element['#prefix_popover']);
+    unset($element['#suffix_popover']);
+  }
+
+  // If the label tag is not defined then make it a label by default
+  if (!isset($element['#label_tag'])) {
+    $element['#label_tag'] =  'label';
+    if (in_array($type,array('radios','checkboxes'))) {
+      $element['#label_tag'] =  'div';
+    }
+  }
+
+  if (!isset($element['#title_align'])) {
+    $element['#title_align'] =  'left';
+  }
+
+
+
+
+
+  // Ensure that labels have the required info.
+  $variables['label'] += array_intersect_key($element, array_flip(array( '#form_type', '#title_grid', '#title_display', '#label_tag', '#title_align', '#tooltip_expand')));
+
+  // If this is a checkbox or a radio then remove the label as it will be dealt with inside the twig template.
+  if (in_array($type, array('checkbox','radio'))) {
+    unset($variables['label']);
+  }
+
+
+  // Flag to indicate the element needs the form-group class.
+  $variables['form_group_wrapper'] = isset(  $variables['element']['#form_group_wrapper']) ?   $variables['element']['#form_group_wrapper'] : TRUE;
+
+
+  // Flag to indicate the element needs the form-[horizontal|basic|inline] group class.
+  $variables['form_field_wrapper'] = isset($variables['element']['#form_field_wrapper']) ?  $variables['element']['#form_field_wrapper'] : TRUE;
+
+
+  // Flag to indicate the element needs a row class around its child elements (used for checkxboes and radios)
+  $variables['form_element_row_wrapper'] = isset(  $variables['element']['#form_element_row_wrapper']) ?   $variables['element']['#form_element_row_wrapper'] : FALSE;
+
+
+  // Flag to indicate the element needs the form-[horizontal|basic|inline] group class.
+  $variables['form_type_wrapper'] = isset($variables['element']['#form_type_wrapper']) ?  $variables['element']['#form_type_wrapper'] : TRUE;
+
+  // Attribute object for the form type div.
+  $form_type_attributes = new Attribute();
+  $form_type_attributes['class'] = array('form-' . $form_type);
+  $variables['form_type_attributes'] = $form_type_attributes;
+
+
+  // Flag to indicate the element needs wrapper class that has the column classes.
+  $variables['form_element_wrapper'] = ($form_type != 'inline' ? TRUE : FALSE);
+
+  // Attribute object for the form element wrapper
+  $form_element_attributes = new Attribute();
+  $form_element_attributes['class'] = array();
+  $variables['form_element_attributes'] = $form_element_attributes;
+  if (isset($variables['element']['#element_grid'])) {
+    _bootstrap_forms_apply_grid($variables['form_element_attributes'], $variables['element']['#element_grid'] );
+  } else {
+    $variables['form_element_wrapper'] = FALSE;
+  }
+
+
+  // Description/Help text
+  if (is_object($variables['description']['attributes'])) {
+    $variables['description']['attributes']->addClass('help-block');
+
+  }
+
+
+  // Tooltips
+
+
+  // Prefixes
+  $variables['prefix_attributes'] = new Attribute();
+  $variables['prefix_attributes']['class'] = array('field_prefix');
+
+  // Suffixes
+  $variables['suffix_attributes'] = new Attribute();
+  $variables['suffix_attributes']['class'] = array('field_suffix');
+
+  // If input group was selected then add the appropriate classes
+  if (isset($element['#input_group']) && $element['#input_group']) {
+      $variables['input_group_wrapper'] = TRUE;
+    $variables['prefix_attributes']['class'][] = 'input-group-addon';
+    $variables['suffix_attributes']['class'][] = 'input-group-addon';
+  }
+
+
+
+  // Prefix tooltip
+  if (isset($element['#prefix_tooltip']) && !empty($element['#prefix_tooltip']['title'])) {
+    $variables['input_group_wrapper'] = TRUE;
+    $variables['prefix_attributes']['class'][] = 'input-group-addon';
+    $variables['prefix'] = array(
+      '#theme' => 'tooltip',
+      '#title' => $element['#prefix_tooltip']['title']
+    );
+  }
+
+  // Suffix tooltip
+  if (isset($element['#suffix_tooltip']) && !empty($element['#suffix_tooltip']['title']) ) {
+    $variables['input_group_wrapper'] = TRUE;
+    $variables['suffix_attributes']['class'][] = 'input-group-addon';
+    $variables['suffix'] = array(
+      '#theme' => 'tooltip',
+      '#title' => $element['#suffix_tooltip']['title'],
+    );
+  }
+
+
+  // Prefix popover
+  if (isset($element['#prefix_popover']) && !empty($element['#prefix_popover']['title']) &&  !empty($element['#prefix_popover']['content'])) {
+    $variables['input_group_wrapper'] = TRUE;
+    $variables['prefix_attributes']['class'][] = 'input-group-addon';
+    $variables['prefix'] = array(
+      '#theme' => 'popover',
+      '#title' => $element['#prefix_popover']['title'],
+      '#content' => $element['#prefix_popover']['content']
+    );
+  }
+
+  // Suffix popover
+  if (isset($element['#suffix_popover']) && !empty($element['#suffix_popover']['title']) &&  !empty($element['#suffix_popover']['content'])) {
+    $variables['input_group_wrapper'] = TRUE;
+    $variables['suffix_attributes']['class'][] = 'input-group-addon';
+    $variables['suffix'] = array(
+      '#theme' => 'popover',
+      '#title' => $element['#suffix_popover']['title'],
+      '#content' => $element['#suffix_popover']['content']
+    );
+  }
+
+  if (isset($element['#label_display'])) {
+    $variables['label_display'] = $element['#label_display'];
+  }
+
+  $variables['information'] = '';
+  if (isset($element['#information'])) {
+    $variables['information'] = $element['#information'];
+  }
+
+
+}
+
+
+function bootstrap_forms_preprocess_form_element_label(&$variables) {
+
+  // Grab a reference to the element.
+  $element = &$variables['element'];
+
+  if (isset($element['#tooltip_expand'])) {
+    $tip = ['#theme' => 'tooltip'];
+    $variables['title']['#markup'] .= drupal_render($tip);
+
+  }
+
+  // Helper variable for form type (Basic, Horizontal, Inline)
+
+  $form_type = isset($element['#form_type']) ? $element['#form_type'] : 'basic';
+
+  $variables['label_tag'] = $variables['element']['#label_tag'];
+  if ($variables['label_tag'] != 'label') {
+    $variables['attributes']['class'][] = 'as-label';
+    $variables['attributes']['class'][] = 'aria-hidden';
+    // When a label is a div the for attribute is not needed.
+    unset( $variables['attributes']['for']);
+  }
+
+  // label Alignment.
+  if (isset($variables['element']['#title_align'])) {
+    $variables['attributes']['class'][] = 'label--' . $variables['element']['#title_align'];
+  }
+
+  // Apply bootstrap column classes. (radios and checkboxes dont have a label column class)
+  if (isset($variables['element']['#title_grid']) ) {
+    _bootstrap_forms_apply_grid($variables['attributes'], $variables['element']['#title_grid'] );
+  }
+
+  // If the form is horizontal then labels need the 'control-label' class applied.
+  if ($form_type == 'horizontal') {
+    $variables['attributes']['class'][] = 'control-label';
+  }
+
+
+
+}
+
+
+/**
+ * Preprocess input element.
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_input(&$variables) {
+  // Grab a reference to the element.
+  $element = &$variables['element'];
+
+  // Helper variable for form type (Basic, Horizontal, Inline)
+  $form_type = isset($element['#form_type']) ? $element['#form_type'] : 'basic';
+
+  // Helper variable for the element type.
+  $type = $element['#type'];
+
+  // If this is a checkbox then kill the label as it will be dealt with inside the twig template.
+  if (in_array($type, array('checkbox','radio'))) {
+    // Add a new label attribute for this special case.
+    $variables['label_attributes'] = new Attribute();
+    $variables['label_attributes']['class'] = array();
+
+    // Add the title of the field as a child element to be rendered in twig.
+    if (isset( $variables['element']['#title'])) {
+      $variables['children'] = array(
+        '#markup' => $variables['element']['#title']
+      );
+    }
+
+
+  }
+
+  // All inputs require the form control class except for checkbox.
+  if (!in_array($variables['element']['#type'],array('checkbox','radio','submit'))) {
+    $variables['attributes']['class'][] = 'form-control';
+  }
+
+  // Add a class to control element widths
+  if (isset($variables['element']['#element_width_auto']) && $variables['element']['#element_width_auto']) {
+    $variables['attributes']['class'][] = 'element--width-auto';
+  }
+
+}
+
+/**
+ * Preprocess textarea element.
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_textarea(&$variables) {
+  // Add the form-control class for textarea elements.
+  $variables['attributes']['class'][] = 'form-control';
+}
+
+
+/**
+ * Preprocess textarea element.
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_select(&$variables) {
+  // Add the form-control class for select elements.
+  $variables['attributes']['class'][] = 'form-control';
+}
+
+
+/**
+ * Preprocess radios element. // @todo merge with checkboxes function
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_radios($element) {
+
+  // We need to do some manipulation to deal with labels and fieldsets
+
+
+
+
+  if (isset($element['#child_grid'])) {
+    $element['#form_element_row_wrapper'] = TRUE;
+  }
+  // Remove the form group wrapper for all checkboxes child checkboxes.
+  foreach (Element::children($element) as $key) {
+    $element[$key]['#form_group_wrapper'] = FALSE;
+    // Make sure child elements are inside a row.
+
+    if (isset($element['#child_grid'])) {
+      $element[$key]['#form_type'] = 'horizontal';
+      $element[$key]['#form_type_wrapper'] = FALSE;
+      // Copt the child grid options to all the children.
+      $element[$key]['#element_grid'] = $element['#child_grid'];
+    }
+  }
+  return $element;
+}
+/**
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_details(&$variables) {
+   // Add the new option of #summary_description as a twig variable.
+    $variables['summary_description'] = $variables["element"]["#summary_description"];
+    $variables['summary_title'] = isset($variables["element"]["#summary_title"]) ? $variables["element"]["#summary_title"] : $variables["element"]['#title'];
+    $test = 1;
+}
+
+
+/**
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_fieldset(&$variables) {
+  // If we are rendering a set of radio buttons in fieldset then add a class to the legend.
+
+}
+
+/**
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_checkboxes_fieldset(&$variables) {
+  // If we are rendering a set of radio buttons in fieldset then add a class to the legend.
+  $variables['legend']['attributes']->addClass('sr-only');
+}
+
+/**
+ * Preprocess checkboxes element. // @todo merge with radios function
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_checkboxes($element) {
+  if (isset($element['#child_grid'])) {
+    $element['#form_element_row_wrapper'] = TRUE;
+  }
+
+
+  // Remove the form group wrapper for all checkboxes child checkboxes.
+  foreach (Element::children($element) as $key) {
+    $element[$key]['#form_group_wrapper'] = FALSE;
+    // Make sure child elements are inside a row.
+
+    if (isset($element['#child_grid'])) {
+      $element[$key]['#form_type'] = 'horizontal';
+      $element[$key]['#form_type_wrapper'] = FALSE;
+      // Copt the child grid options to all the children.
+      $element[$key]['#element_grid'] = $element['#child_grid'];
+    }
+  }
+
+  return $element;
+}
+
+
+/**
+ * Preprocess textarea element.
+ * @param $variables
+ */
+function bootstrap_forms_preprocess_datetime_form(&$variables) {
+  // Remove the fieldset from checkboxes
+  $t = 2;
+  $test = 'test';
+
+  // Loop through all the children and remove some defaults.
+  foreach (Element::children($variables['element']) as $key) {
+
+    // Make the sub elements inline.
+    $variables['content'][$key]['#form_type'] = 'inline';
+    $variables['content'][$key]['#form_group_wrapper'] = FALSE;
+  }
+}
+
+
+
+/**
+ * Apply gird classes to an attribute object
+ * @param $attributes
+ * @param $grid
+ */
+function _bootstrap_forms_apply_grid(&$attributes, $grid) {
+
+  // Columns
+  if (isset($grid['columns'])) {
+    foreach ($grid['columns'] as $size => $width) {
+      if (!empty($width)) {
+        $attributes['class'][] = 'col-' . $size . '-' . $width;
+      }
+    }
+  }
+
+  // Offset
+  if (isset($grid['offset'])) {
+    foreach ($grid['offset'] as $size => $width) {
+      if (!empty($width)) {
+        $attributes['class'][] = 'col-' . $size . '-offset-' . $width;
+      }
+    }
+  }
+
+  // Push
+  if (isset($grid['push'])) {
+    foreach ($grid['push'] as $size => $width) {
+      if (!empty($width)) {
+        $attributes['class'][] = 'col-' . $size . '-push-' . $width;
+      }
+    }
+  }
+
+  // Pull
+  if (isset($grid['pull'])) {
+    foreach ($grid['pull'] as $size => $width) {
+      if (!empty($width)) {
+        $attributes['class'][] = 'col-' . $size . '-pull-' . $width;
+      }
+
+    }
+  }
+
+
+}
+
+
+
+
+
+function bootstrap_forms_theme($existing, $type, $theme, $path) {
+  return array(
+    'dropbutton' => array(
+      'variables' => array(
+        'title' => '',
+        'links' => array()
+      ),
+      'template' => 'dropbutton',
+      'path' => drupal_get_path('theme','bootstrap_forms') . '/templates/bootstrap'
+    ),
+    'tooltip' => array(
+      'variables' => array(
+        'icon' => 'glyphicon-question-sign',
+        'html' => 'true',
+        'placement' => 'right',
+        'title' => ''
+      ),
+      'template' => 'tooltip',
+      'path' => drupal_get_path('theme','bootstrap_forms') . '/templates/bootstrap'
+    ),
+    'popover' => array(
+      'variables' => array(
+        'icon' => 'glyphicon-question-sign',
+        'html' => 'true',
+        'placement' => 'right',
+        'title' => '',
+        'content' => ''
+      ),
+      'template' => 'popover',
+      'path' => drupal_get_path('theme','bootstrap_forms') . '/templates/bootstrap'
+    ),
+    'options_fieldset' => [
+      'render element' => 'element',
+    ],
+  );
+}
+
+
+
+function bootstrap_forms_preprocess_field_multiple_value_form(&$variables) {
+
+  $element = $variables['element'];
+
+  // When an element has mulitple true
+  if ($element['#cardinality_multiple'] == true) {
+//    $old = $variables;
+//    $variables = array();
+//    $variables['multiple'] = true;
+//    $variables['table'] = array(
+//      '#type' => 'container',
+//      '#theme_wrappers' => array('form_element'),
+//      '#title' => 'test',
+//      '#description' => 'testering',
+//      'child' => array(
+//         '#markup' => 'dghsdgsdgsdgsdg'
+//      )
+//    );
+
+  }
+
+  $test = 1;
+}
+
+
+
+/**
+ * Prepares variables for fieldset element templates.
+ *
+ * Default template: fieldset.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #attributes, #children, #description, #id, #title,
+ *     #value.
+ */
+function bootstrap_forms_preprocess_options_fieldset(&$variables) {
+  $element = $variables['element'];
+  Element::setAttributes($element, ['id']);
+  RenderElement::setAttributes($element);
+  $variables['attributes'] = isset($element['#attributes']) ? $element['#attributes'] : [];
+  $variables['prefix'] = isset($element['#field_prefix']) ? $element['#field_prefix'] : NULL;
+  $variables['suffix'] = isset($element['#field_suffix']) ? $element['#field_suffix'] : NULL;
+  $variables['title_display'] = isset($element['#title_display']) ? $element['#title_display'] : NULL;
+  $variables['children'] = $element['#children'];
+  $variables['required'] = !empty($element['#required']) ? $element['#required'] : NULL;
+
+  if (isset($element['#title']) && $element['#title'] !== '') {
+    $variables['legend']['title'] = ['#markup' => $element['#title']];
+  }
+
+  $variables['legend']['attributes'] = new Attribute();
+  // Add 'visually-hidden' class to legend span.
+  if ($variables['title_display'] == 'invisible') {
+    $variables['legend_span']['attributes'] = new Attribute(['class' => ['visually-hidden']]);
+  }
+  else {
+    $variables['legend_span']['attributes'] = new Attribute();
+  }
+
+  if (!empty($element['#description'])) {
+    $description_id = $element['#attributes']['id'] . '--description';
+    $description_attributes['id'] = $description_id;
+    $variables['description']['attributes'] = new Attribute($description_attributes);
+    $variables['description']['content'] = $element['#description'];
+
+    // Add the description's id to the fieldset aria attributes.
+    $variables['attributes']['aria-describedby'] = $description_id;
+  }
+
+  // Suppress error messages.
+  $variables['errors'] = NULL;
+
+  // Legend are too awkward in fiedlsets to be visible.
+  $variables['legend']['attributes']->addClass('sr-only');
+
+}

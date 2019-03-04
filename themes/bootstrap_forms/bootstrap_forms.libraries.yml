@@ -1,0 +1,28 @@
+form-styling:
+  version: 1.0
+  css:
+    theme:
+      css/forms.css: {}
+
+bootstrap-scripts:
+  js:
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/affix.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/alert.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/button.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/carousel.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/collapse.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/modal.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js: {weight: -2}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/popover.js: {weight: -1}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/tab.js: {}
+    /libraries/bootstrap-sass/assets/javascripts/bootstrap/transition.js: {}
+
+popover:
+  js:
+    js/popover.js: {}
+
+tooltip:
+  js:
+    js/tooltip.js: {}

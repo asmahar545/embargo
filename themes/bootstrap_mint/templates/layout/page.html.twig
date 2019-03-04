@@ -1,0 +1,755 @@
+{#
+/**
+ * @file
+ * Bootstrap Mint's theme implementation to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.sliding_header_one: Items for the Sliding Header Left region.
+ * - page.sliding_header_two: Items for the Sliding Header Right region.
+ * - page.header: Items for the Header region.
+ * - page.primary_menu: Items for the Primary Menu navigation region.
+ * - page.page_title: Region for the current page title.
+ * - page.slideshow: Items for the Slideshow region.
+ * - page.promo: Items for the promo region.
+ * - page.highlighted: Items for the Highlighted region.
+ * - page.topwidget_left: Items for the Top Widget - Left region.
+ * - page.topwidget_middle: Items for the Top Widget - Middle region.
+ * - page.topwidget_right: Items for the Top Widget - Right region.
+ * - page.content_top: Items for the Content Top region.
+ * - page.help: Items for the Help region.
+ * - page.breadcrumb: Items for the Breadcrumb region.
+ * - page.search: The search region.
+ * - page.content: Main content of the current page.
+ * - page.sidebar_first: Items for the Left sidebar region.
+ * - page.sidebar_second: Items for the Right sidebar region.
+ * - page.content_bottom: Items for the Content Bottom region.
+ * - page.footer_top_one: Items for the Footer Top Widget - One region.
+ * - page.footer_top_two: Items for the Footer Top Widget - Two region.
+ * - page.footer_top_three: Items for the Footer Top Widget - Three region.
+ * - page.footer_top_four: Items for the Footer Top Widget - Four region.
+ * - page.footer: Items for the Footer region.
+ * - page.footer_menu: Items for the Footer Menu region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ *
+ * @ingroup themeable
+ */
+#}
+
+<!-- Header and Navbar -->
+<header class="main-header">
+<!-- Sliding Header Widget -->
+{% if is_front %}
+  {% if page.sliding_header_one or page.sliding_header_two %}
+    <div class="slidewidget">
+	<div class="wrapper">
+      <!-- start: Container -->
+      <div class="container">
+        
+        <div class="row">
+          <div id="sliding-header-wrap">
+          <!-- Slide first region -->
+          
+          {% if page.sliding_header_one %}
+            <div class = {{ slidewidget_first }}>
+              {{ page.sliding_header_one }}
+            </div>
+          {% endif %}
+          
+          <!-- End slide first region -->
+          <!-- Slide second region -->
+          
+          {% if page.sliding_header_two %}
+            <div class = {{ slidewidget_class }}>
+              {{ page.sliding_header_two }}
+            </div>
+          {% endif %}
+          
+          <!-- End slide second region -->
+          
+	</div>
+        </div>
+       </div>
+	  <!-- end: Container -->
+	  </div>
+	  <div class="toggle-switch"><div class="fa fa-gear fa-spin"></div></div>
+    </div>
+  {% endif %}
+{% endif %}
+<!--Sliding Header Widget -->
+  <nav     class="navbar topnav navbar-default" role="navigation">
+    <div class="container">
+      <div class="row">
+      <div class="navbar-header col-md-3">
+        <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          
+        </button>
+        {% if page.header %}
+          {{ page.header }}
+        {% endif %}
+      </div>
+
+      <!-- Navigation -->
+      <div class="col-md-9">
+        {% if page.primary_menu %}
+          {{ page.primary_menu }}
+        {% endif %}      
+      </div>
+      <!--End Navigation -->
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+
+ {% if is_front and page.slideshow %}  
+      <img  src="http://embargo.grip.org/ban1.jpg" >
+    <div class="container slideshow">
+      <div class="row">
+        <div class="col-md-12">
+            
+          {# {{ page.slideshow }}   #}
+        </div>
+      </div>
+    </div>
+        {% endif %}
+
+  
+  <!-- End Banner -->
+
+</header>
+<!--End Header & Navbar -->
+
+
+<!--Search-->
+  {% if is_front and page.search %}
+    {{ page.search }}
+  {% endif %}
+<!--End Search-->
+
+
+<!--Home page banner-->
+  {% if is_front and page.promo %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {{ page.promo }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+<!--End Home page banner-->
+
+
+
+<!--Highlighted-->
+  {% if page.highlighted %}
+    <div class="container">
+      <div class="row">
+      <br>
+      <br>
+
+  
+<div class="col-md-12">
+ {{ page.highlighted }}
+ </div>
+ </div>
+  </div>
+  {% endif %}
+<!--End Highlighted-->
+
+<!--Help-->
+  {% if page.help %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {{ page.help }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+<!--End Help-->
+
+<!-- Start Top Widget -->
+{% if is_front %}  
+  {% if page.topwidget_left or page.topwidget_middle or page.topwidget_right %}
+    <div class="topwidget">
+      <!-- start: Container -->
+      <div class="container">
+        
+        <div class="row">
+
+          <!-- Top widget left region -->
+          
+          {% if page.topwidget_left %}
+            <div class = {{ topwidget_class }}>
+              {{ page.topwidget_left }}
+            </div>
+          {% endif %}
+          
+          <!-- End top widget left region -->		  
+          <!-- Top widget middle region -->
+          
+          {% if page.topwidget_middle %}
+            <div class = {{ topwidget_class }}>
+              {{ page.topwidget_middle }}
+            </div>
+          {% endif %}
+          
+          <!-- End top widget middle region -->
+          <!-- Top widget right region -->
+          
+          {% if page.topwidget_right %}
+            <div class = {{ topwidget_class }}>
+              {{ page.topwidget_right }}
+            </div>
+          {% endif %}
+          
+          <!-- End top widget right region -->
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+<!--End Top Widget -->
+
+
+<!-- Page Title -->
+{%  if page.page_title and not is_front %}
+  <div id="page-title">
+    <div id="page-title-inner">
+      <!-- start: Container -->
+      <div class="container-fluid">
+        {{ page.page_title }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+<!-- End Page Title -->
+
+
+<!-- layout -->
+<div id="wrapper">
+  <!-- start: Container -->
+  <div class="container-fluid">
+    
+    <!--Start Content Top-->
+    {% if page.content_top %}
+    <div class="content-top">
+        <div class="row">
+		  <div class="col-md-12">
+            {{ page.content_top }}
+		  </div>
+        </div>
+	</div>
+    {% endif %}
+    <!--End Content Top-->
+    
+    <!--start:Breadcrumbs -->
+	{%  if not is_front %}
+    <div class="row">
+      <div class="col-md-12">{{ page.breadcrumb }}</div>
+    </div>
+	{% endif %}
+    <!--End Breadcrumbs-->
+	
+    <div class="row layout">
+      <!--- Start Left Sidebar -->
+      {% if page.sidebar_first %}
+          <div class = "{{sidebarfirst}} sidebar-first">
+            {{ page.sidebar_first }}
+          </div>
+      {% endif %}
+      <!---End Left Sidebar -->
+       {% if is_front  %}
+       {% if language.getId() == 'fr' %}
+           <h1 class="text-center titrehome">Les embargos sur les armes </h1
+            {% else %}
+           <h1 class="text-center titrehome">The arms embargoes</h1>
+             
+       {% endif %}  
+       {% endif %}  
+      <!--- Start content -->
+
+    {% if page.content %}
+     <div class="{{contentlayout}} content-layout">
+      {{ page.content }}
+      {% if is_front  %} 
+                
+    
+        
+    <div class="col-md-12">
+        <div class="col-md-1">
+            
+        </div>
+        
+         <div  style="text-align:valeur" class="col-md-4">
+  <span class=" fa-stack fa-5x has-badge" data-count="3">
+    <i class=" fa fa-circle fa-stack-2x"></i>
+    <i class="p3 fa fa-database fa-stack-1x fa-inverse" data-count="5"></i>
+  </span>
+  {% if language.getId() == 'fr' %}
+ <p class="text-justify">
+    Cette base de données fournit un aperçu le plus actuel possible des régimes d’embargos sur les armes. 
+    L’information contenue  est par conséquent régulièrement mise à jour, vérifiée et enrichie 
+ </p>
+ {% else %}
+ <p class="text-justify">
+    This database aims to give an updated snapshot of the arms embargoes’ regimes. 
+    The information contained herein is therefore regularly updated, checked and supplemented.
+ </p>
+ {% endif %}
+  
+</div>
+     <div class="col-md-3">
+    <span class=" fa-stack fa-5x has-badge" data-count="3">
+    <i class=" fa fa-circle fa-stack-2x"></i>
+    <i  class="p3 fa fa-book fa-stack-1x fa-inverse" data-count="5"></i>
+    </span>
+  {% if language.getId() == 'fr' %}
+  <p class="text-justify">
+    L’information contenue dans cette base de données est régulièrement mis à jour, enrichie et vérifiée par le GRIP. 
+  </p>
+  {% else %}
+  <p class="text-justify">
+    The information of this database is regularly updated, checked and supplemented.  
+  </p>
+  {% endif %}
+</div>
+ 
+    
+<div class="col-md-4">
+    
+  <span class="p1 fa-stack fa-5x has-badge" data-count="3">
+    <i class="p2 fa fa-circle fa-stack-2x"></i>
+    <i  class="p3 fa fa-institution fa-stack-1x fa-inverse" data-count="5"></i>
+  </span>
+   {% if language.getId() == 'fr' %}
+   <p class="text-justify">
+   Les organisations internationales et régionales ayant adopté et / ou mis en œuvre des mesures des embargos sur les armes depuis 2000 sont les suivantes : la Communauté Économique des États d’Afrique de l’Ouest (CEDEAO), la Ligue des États Arabes (LEA), l’Organisation pour la Sécurité 
+   et la Coopération en Europe (OSCE), l’Union européenne (UE) et les Nations unies. 
+   <p>
+    {% else %}     
+   <p class="text-justify">
+   Regional or international organisations which have enacted and / or implemented arms embargoes since 2000 are the following : The African Union (AU), The Economic Community of African States (ECOWAS), the European Union (EU), the League of Arab States (LAS), 
+   the Organisation for Security and Cooperation in Europe (OSCE) and the United Nations (UN).   
+   </p>
+   {% endif %} 
+</div>
+
+
+</div>
+
+    <div class="row">
+        <div class="col-lg-12 ">
+           <div class="col-lg-1 ">
+                  </div>
+                  
+                  <div class="col-lg-11 ">
+              
+            {% if language.getId() == 'fr' %}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Les embargos sur les armes en quelques chiffres :</h1>
+        {% else %}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Key figures on arms embargoes :</h1>
+        {% endif %} 
+            </div>
+        </div>
+    </div>
+
+    
+   <!--chiffres embargos-->
+    
+  <div class="col-lg-12">
+       
+      <div class="col-lg-2"></div>
+  <div class="col-lg-5">
+      <br>
+    
+ {% if language.getId() == 'fr' %}
+    <p>
+   <i><h1><b>&nbsp;&nbsp;22</b></h1></i> 
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Nombre d’États ou territoires sous embargo
+  </p>
+   <p>
+       <i>  <h1><b>&nbsp;&nbsp;5</b></h1></i>    
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre d’entités non-étatiques sous embargos 
+  </p>
+  <p>
+      <i><h1><b>&nbsp;&nbsp;&nbsp;6</b></h1> </i>
+   
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre d’organisations mettant en œuvre un embargo
+  </p>
+  <!--
+  <p>
+   <i><h1><b>&nbsp;&nbsp;22</b></h1></i> 
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p> <br>
+  </p>
+  <p>
+      <i><h1><b>&nbsp;&nbsp;5</b></h1> </i>   
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   
+  </p>
+    <p>
+        <i> <h1><b>&nbsp;&nbsp;6</b></h1> </i> 
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <br>-->
+     
+     
+ {% else %}
+     
+  <p>
+   <i><h1><b>&nbsp;&nbsp;22</b></h1></i> 
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of States or territories currently under arms embargo
+  </p>
+   <p>
+       <i>  <h1><b>&nbsp;&nbsp;5</b></h1></i>    
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of non-state entities currently under arms embargo   
+  </p>
+   
+  <p>
+      <i><h1><b>&nbsp;&nbsp;&nbsp;6</b></h1> </i>
+   
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of multilateral organizations implementing arms embargoes 
+  </p>
+   {% endif %}  
+</div>
+<div class="col-lg-5">
+    <br>
+    <br>
+  <div id="imageembargo"> </div>
+  
+</div>
+
+</div>
+</div>
+
+<!--
+<div class="col-md-12">
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.populationdata.net/wp-content/uploads/monde-politique.gif" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Nombre  de pays</h5>
+    <p class="card-text">Arménie,...,...</p>
+    <a href="http://localhost/drupal-8.6.3/fr/viewslist" class="btn btn-primary">Plus d'infos</a>
+  </div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://pngimage.net/wp-content/uploads/2018/06/icono-buscar-png-9.png" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">...</h5>
+    <p class="card-text">Recherche</p>
+    <a href="#" class="btn btn-primary">Plus d'infos</a>
+  </div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.chea.org/sites/default/files/2018-04/Institutions1_0.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Organisations</h5>
+    <p class="card-text">ONE, UE, LEA,...</p>
+    <a href="#" class="btn btn-primary">Plus d'infos</a>
+  </div>
+</div>
+</div>
+</div>-->
+          </div>
+  
+      {% endif %}
+      {% endif %}
+      <!---End content -->
+
+      <!--- Start Right Sidebar -->
+      {% if page.sidebar_second %}
+          <div class="{{sidebarsecond}} sidebar-second">
+            {{ page.sidebar_second }}
+          </div>
+
+      {% endif %}
+      <!---End Right Sidebar -->
+      
+    </div>
+    <!--End Content -->
+
+    <!--Start Content Bottom-->
+    {% if page.content_bottom %}
+        
+    <div class="content-bottom">
+        <div class="row">
+		  <div class="col-md-12">
+                      
+   
+            {{ page.content_bottom }}
+		  </div>
+        </div>
+	</div>
+    {% endif %}
+    <!--End Content Bottom-->
+  </div>
+</div>
+<!-- End layout -->
+
+<!-- Start Footer -->
+  {% if page.footer_top_one or page.footer_top_two or page.footer_top_three or page.footer_top_four %}
+    <div class="footer-widgets">
+      <!-- Start Container -->
+      <div class="container">
+        
+        <div class="row">
+
+          <!-- Start Footer Top One Region -->
+          
+          {% if page.footer_top_one %}
+            <div class = {{ footer_top_class }}>
+              {{ page.footer_top_one }}
+            </div>
+          {% endif %}
+          
+          <!-- End Footer Top One Region -->
+
+          <!-- Start Footer Top Two Region -->
+          {% if page.footer_top_two %}
+            <div class = {{ footer_top_class }}>
+              {{ page.footer_top_two }}
+            </div>
+          {% endif %}
+          
+          <!-- End Footer Top Two Region -->
+
+          <!-- Start Footer Top Three Region -->
+          
+          {% if page.footer_top_three %}
+            <div class = {{ footer_top_class }}>
+              {{ page.footer_top_three }}
+            </div>
+          {% endif %}
+          
+          <!-- End Footer Top Three Region -->
+		  
+		  <!-- Start Footer Top Four Region -->
+
+          {% if page.footer_top_four %}
+          <div class = {{ footer_top_class }}>
+            {{ page.footer_top_four }}
+          </div>
+          {% endif %}
+		  
+		  <!-- End Footer Top Four Region -->
+
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <!-- Footer Region-->
+  {% if page.footer %}
+    <div class="footer-space">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              
+            {{ page.footer }}
+          </div>
+      </div>
+      </div>
+	</div>
+  {% endif %}
+  <!-- End Footer Region-->
+<!--End Footer -->
+
+<!-- Start Footer Ribbon -->
+{% if page.footer_menu %}
+    
+     {% if is_front %}
+    <div style="background-color: #246F8C;" class="panel-body">
+        <div class="col-lg-12">
+         
+            <div style="color: #ffffff;" class="col-lg-8">
+   {% if language.getId() == 'fr' %} 
+       <br>
+       
+  <p class="text-justify"><i>
+  Cette base de données est réalisée dans le cadre de la « Cellule de veille sur l’évolution de la production 
+  et des transferts d’armes en Belgique, en Europe et dans le monde», financée par la Région wallonne, 
+  et bénéficie du soutien financier de l’UNSCAR.   </i> </p>
+  <p><i></i></p>
+     
+  {% else %}
+      <br>
+      
+  <p class="text-justify"><i>
+    This database has been initially developped as part of 
+  
+    the project « Cellule de veille sur l’évolution de la
+    production et des transferts d’armes en Belgique, en Europe et
+    dans le monde », funded by the Walloon Region, and then benefitted from the support of the UNSCAR.  </i>  
+    </p>
+  {% endif %}
+        </div>
+        <div style="color: #ffffff;" class="col-lg-2">
+           <!--<div id="communautefr"></div> -->
+           <img src="http://embargo.grip.org/unscar_logo.png" >
+             
+     
+     
+       </div>
+            <div style="color: #ffffff;" class="col-lg-1">
+                
+     <!--<div id="communautewalonnie"> </div>-->
+     <img src="http://embargo.grip.org/logowallonie.png" >
+       </div>
+          <div style="color: #ffffff;" class="col-lg-1">
+                
+    <!-- <div id="unscarlogo"> </div>-->
+      <img src="http://embargo.grip.org/logo_mini.png" >
+     
+       </div>
+        </div>
+    </div>
+        {% endif  %}
+  <div class="footer-ribbon"><!-- 
+      <div style="background-color: #eee9e9;" class="panel-body">
+    
+         <div class="row">
+         <p style="color: #246F8C;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contactez le GRIP</p>
+         <a href="https://www.grip.org/fr/" style="color: #246F8C;">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visitez le site du Grip</a>
+         </div>
+        
+      <div class="row">
+       
+          
+        <div class="col-lg-12">
+            <div class="col-lg-4"></div> 
+  
+        
+     
+        <div class="col-lg-6">
+            <p style="color: #246F8C; font-size: 105%"> <br> © Grip   Groupe de recherche et d'information sur la paix et la sécurité</p>
+            
+            <div class="social-media">
+               
+           
+           
+          </div>
+        </div>
+        
+         <div class="col-lg-2">
+          
+             </br>
+             <br/>
+
+ 
+       
+        </div>
+        
+        </div>
+      </div>
+    
+    </div>
+      <div style="background-color:#eee9e9;" class="panel-body">
+    
+         <div class="row">
+         <!-- <p style="color: #246F8C;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contactez le GRIP</p>
+         <a href="https://www.grip.org/fr/" style="color: #246F8C;">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visitez le site du Grip</a>--->
+         </div>
+        
+      <div class="row">
+       
+          
+        <div class="col-lg-12">
+           <div class="col-lg-5"></div> 
+  
+        
+  
+         {% if show_social_icon %}
+    
+        {% endif %}
+    
+            <div class="col-lg-5"></div> 
+        </div>
+      </div>
+    
+    </div>
+  </div>
+{% endif %}
+<!-- End Footer Ribbon -->
+
+
+<!-- #footer-bottom -->
+<div id="footer-bottom">
+   
+
+
+    <br>
+    <br>
+    <br> 
+    <div class="container">
+        
+         <div class="row">
+		 <hr class="style-mint">
+         <div id="toTop" class="col-md-12">
+          <a class="scrollUp"><i class="fa fa-angle-up"></i></a>
+         </div>
+        </div>
+        <div class="row">
+            
+        <div class="col-md-12 copy_credit">
+        <p class="copyright">© Grip {{ "now"|date("Y") }} - Groupe de recherche et d'information sur la paix et la sécurité</p>
+        <div class="col-md-12 ">
+           <div class="social-media">
+            
+              <a href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            
+              <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+           
+              <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         
+           </div>
+        </div>
+        
+         {{ page.footer_menu }}
+       
+        {% if show_credit_link %}
+          <p class="credit">Theme for <a href="https://www.drupal.org/8" target="_blank">Drupal 8</a></p>
+        {% endif %}
+        </div>
+		</div>
+    </div>
+</div>
+<!-- #footer-bottom ends here -->

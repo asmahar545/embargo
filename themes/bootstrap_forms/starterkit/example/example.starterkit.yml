@@ -1,0 +1,11 @@
+name: Example
+type: theme
+description: An example subtheme of bootstrap_forms
+package: Core
+# version: VERSION
+core: 8.x
+base theme: bootstrap_forms
+hidden: false
+
+libraries:
+  - example/global-styling

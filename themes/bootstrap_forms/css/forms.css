@@ -1,0 +1,21 @@
+.nav.nav-tabs { margin: 0 0 1em 0; }
+
+form div.control-label, form div.as-label { font-weight: bold; display: inline-block; max-width: 100%; margin-bottom: 5px; font-weight: bold; }
+form div.control-label.label--left, form div.as-label.label--left { text-align: left; }
+form div.control-label.label--right, form div.as-label.label--right { text-align: right; }
+form .form-horizontal .control-label.label--left { text-align: left; }
+form .form-horizontal .control-label.label--right { text-align: right; }
+
+.form-horizontal .control-label { padding-bottom: 7px; }
+
+textarea.element--width-auto, .form-control.element--width-auto, .form-select.element--width-auto { display: inline-block; width: auto; vertical-align: middle; }
+
+.form-control { -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+.help-block { font-size: 14px; }
+
+.form-type-radio label, .form-type-checkbox label { font-weight: 400; }
+
+.fieldset-wrapper div.description { font-size: 14px; margin: 0 0 20px 0; }
+
+.form-required:after { content: '*'; margin: 0 0.5em 0 0; display: inline-block; }
