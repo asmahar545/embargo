@@ -1,5 +1,5 @@
 body {
-  font-family: 'Freight Text Pro', Georgia, Times New Roman, Serif;
+  font-family: 'Oswald', Open Sans, Times New Roman, Serif;
   font-size: 20px;
   line-height: 160%;
   color:#000000;
@@ -366,24 +366,25 @@ div#communautewalonnie {
 /*Social Media*/
 
 .social-media {
-  text-align: right;
+  text-align: left;
 }
 
 .social-media > a {
   position: relative;
-  top: 10px;
+  top: 10px; 
   width: 32px;
   height: 32px;
-  background: #246F8C;
+  background: #ffffff;
   display: inline-block;
   border-radius: 32px;
   -moz-border-radius: 32px 32px 32px 32px;
   -webkit-border-radius: 32px 32px 32px 32px;
-  color: #fff;
+  color: #246F8C;
   margin: 1px;
 }
 
 .social-media > a > .fa {
+ 
   position: absolute;
   left: 32%;
   top: 30%;
