@@ -1,10 +1,10 @@
 body {
-  font-family: 'Oswald', Open Sans, Times New Roman, Serif;
+  font-family:  Trebuchet MS, sans-serif;
   font-size: 20px;
   line-height: 160%;
   color:#000000;
   overflow-x: hidden;
-  font-weight: 300;
+ 
  
 }
 
@@ -91,7 +91,7 @@ background: url(../images/ban1.jpg) ;
 background-color: #246F8C;
 }
 .titrehome{ 
-    font-weight: bold ;
+    
     font-size:  250%;
    
 }
@@ -152,7 +152,7 @@ div#communautewalonnie {
 
 /*couleur du navbar*/
 .main-header nav {
-  background: #fff;
+  background: #41779b;
   border: 0;
   margin: 0;
   position: relative;
@@ -363,6 +363,9 @@ div#communautewalonnie {
   background: #0f7864;
 }
 
+
+
+
 /*Social Media*/
 
 .social-media {
@@ -372,8 +375,8 @@ div#communautewalonnie {
 .social-media > a {
   position: relative;
   top: 10px; 
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   background: #ffffff;
   display: inline-block;
   border-radius: 32px;
@@ -475,7 +478,7 @@ input[type="submit"]:hover {
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #246F8C;
+  background-color: #e12b28;
 }
 
 .navbar-toggle .icon-bar {
@@ -495,24 +498,27 @@ input[type="submit"]:hover {
 nav h2 {
   display: none;
 }
-
+/* cliquer sur le lien du nav*/
 .menu-base-theme a,
 .menu-base-theme a:hover,
 .menu-base-theme a:focus,
 .menu-base-theme a:active {
-  padding: 10px 20px;
-  padding-right: 58px;
+  padding: 15px 20px; /* 15 = hauteur du nav*/
+  padding-right: 15px;
+  background-color: #e12b28;
+  color: #246F8C;
   line-height: 23px;
   text-decoration: none;
+   
 }
 
 .menu-base-theme a.current {
-  background: #006892;
-  color: white;
+  background: #246F8C;
+  color: #ffffff;
 }
 
 .menu-base-theme a.disabled {
-  color:#246F8C;
+  color: #ffffff;
 }
 
 .menu-base-theme a span.sub-arrow {
@@ -541,7 +547,7 @@ nav h2 {
 }
 
 .menu-base-theme ul {
-  background: white;
+  background: red;
 }
 
 .menu-base-theme ul ul {
@@ -601,6 +607,7 @@ nav h2 {
 
 #search-block-form {
   display: table;
+//  border: solid;
   width: 100%;
 }
 
@@ -609,10 +616,13 @@ nav h2 {
   display: table-cell;
   vertical-align: top;
   position: relative;
+ // border: solid;
 }
 
 #search-block-form .form-search {
   padding-right: 34px;
+  border: 1px  solid  #246F8C;
+  border-radius: 15px ;
 }
 
 #search-block-form .form-actions {

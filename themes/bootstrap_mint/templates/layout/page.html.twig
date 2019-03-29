@@ -65,12 +65,96 @@
  * @ingroup themeable
  */
 #}
- 
+
+
 
 <!-- Header and Navbar -->
 <header class="main-header">
-   
-   
+   <!-- francais  -->
+   {% if language.getId() == 'fr' %}
+    <nav class="navbar" style="background-color:#0d5178;">
+    <div class="container-fluid"> 
+       <a class="navbar-brand col-lg-7" href="#">
+    
+    
+  </a>
+        <ul class="nav navbar-nav navbar-right col-lg-5">  
+           <li><a href="https://www.grip.org/" style="font-size: 16px; color: #3f8ec1"><i>Visitez le site du Grip</i></a>  </li>
+           <li><a href="https://www.grip.org/fr/contact/contact" style="font-size:16px; color: #3f8ec1"><i>Contactez  le Grip</i></a>  </li>
+              <li>
+            <div style="padding-top:0.5em;padding-left:0.4em;">
+                    
+            <a style="font-weight: bold;color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en">En</a>
+            <a  style="font-weight: bold;color: #FFFFFF; font-size: 18px; text-decoration: underline; " href="http://localhost/embargo/fr">/Fr</a>
+            </div>
+            </li>
+           <li> <div style="padding-left:0.6em;"class="social-media">
+           
+ 
+           
+              <a style="font-size: 16px;" href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            
+              <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+           
+              <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         
+          
+              </div>
+           </li>
+           
+         
+      
+     
+         
+     
+        </ul>
+        <ul>
+            
+            
+        </ul>
+     
+    </div> 
+ </nav>
+    {% else %}
+    <!-- anglais -->
+      <nav class="navbar" style="background-color:#0d5178;">
+    <div class="container-fluid"> 
+       <a class="navbar-brand col-lg-7" href="#">
+    
+    
+  </a>
+        <ul class="nav navbar-nav navbar-right col-lg-5">  
+           <li><a href="https://www.grip.org/" style="font-size: 16px; color: #3f8ec1"><i>Visit GRIP website</i></a>  </li>
+           <li><a href="https://www.grip.org/fr/contact/contact" style="font-size:16px; color: #3f8ec1"><i>Contact the Grip</i></a>  </li>
+           
+          <li>
+            <div style="padding-top:0.5em;padding-left:0.4em;">
+                    
+            <a style="font-weight: bold;color: #FFFFFF; font-size: 18px; text-decoration: underline; " href="http://localhost/embargo/en">En</a>
+            <a style="font-weight: bold;color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr">/Fr</a>
+                </div>
+            </li>
+           <li> <div style="padding-left:0.6em;"class="social-media">
+           
+ 
+           
+              <a style="font-size: 16px;" href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            
+              <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+           
+              <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         
+          
+              </div>
+           </li>
+               
+         
+     
+        </ul>
+     
+    </div> 
+ </nav>
+    {% endif %}
 <!-- Sliding Header Widget -->
 {% if is_front %}
   {% if page.sliding_header_one or page.sliding_header_two %}
@@ -112,50 +196,53 @@
   {% endif %}
 {% endif %}
 <!--Sliding Header Widget -->
-<!-- panel bleu bootrsaaap<div class="p-3 mb-2 bg-primary text-white">.</div>-->
- 
-  <nav     class="navbar topnav navbar-default" role="navigation">
-     <!-- <div class="col-md-12">
-           <div class="col-md-1">
-   
-      </div>
-           <div class="col-md-1">
-               
-      </div>
-          <div class="col-md-10">
-              <div class="p-3 mb-2 bg-primary text-white"><img width="120"src="http://embargo.grip.org/GRIP.PNG" ></div>
-          </div>
-          </div>-->
-   
-    <div class="container">
+<!-- nav francais</div>-->
+{% if language.getId() == 'fr' %}
+<nav  style=" pading: 20px;"class="navbar navbar-light bg-light ">
      
-      <div class="row">
-      <div class="navbar-header col-md-2">
-        <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          
-        </button> 
-        {% if page.header %}
-           
-          {{ page.header }}
-        {% endif %}
-      </div>
+  <a class="navbar-brand col-lg-4" href="#">
 
-      <!-- Navigation -->
-      <div class="col-md-10">
-        {% if page.primary_menu %}
-          {{ page.primary_menu }}
-        {% endif %}      
-      </div>
-      <!--End Navigation -->
+    
+  </a>
+    <ul  class="nav navbar-nav col-lg-7 ">
+      <li><img src="http://embargo.grip.org/logo1.png" width="125" height="125"  alt=""></li>
+      <li><a  onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr"><i>Accueil</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr/viewslist"><i>Recherche</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr/node/1"><i>Présentation</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr/node/2"><i>Avertissement</i></a></li>
+    
+      
+    
+    </ul>
+       <ul  class="nav navbar-nav col-lg-1 ">
+ 
+      
+    
+    </ul>
+    
+</nav>
 
-      </div>
-    </div>
-  </nav>
+{% else %}
+<!-- nav Anglais </div>-->
 
+<nav  style="min-height: 68px;"class="navbar navbar-light bg-light">
+    
+  <a class="navbar-brand col-lg-4" href="#">
+    
+    
+  </a>
+    <ul class="nav navbar-nav col-lg-8 ">
+      <li><img src="http://embargo.grip.org/logo1.png" width="125" height="125"  alt=""></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en"><i>Home</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';" style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/viewslist"><i>Search</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';"style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/node/1"><i>About</i></a></li>
+      <li><a onmouseover="this.style.background='#0d5178';this.style.color='#FFFFFF';"  onmouseout="this.style.background='';this.style.color='#FFFFFF';"style="font-weight: bold; padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/node/2"><i>Disclaimer</i></a></li>
+      
+    </ul>
+    
+</nav>
+  
+{% endif %}
   <!-- Banner -->
 
  {% if is_front and page.slideshow %}  
@@ -175,6 +262,10 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+       <li data-target="#myCarousel" data-slide-to="4"></li>
+       <li data-target="#myCarousel" data-slide-to="5"></li>
+ 
     </ol>
 
     <!-- Wrapper for slides -->
@@ -183,15 +274,28 @@
         <img src="http://embargo.grip.org/ban1.jpg" alt="Los Angeles" style="width:100%;">
       
       </div>
-
+       
       <div class="item">
         <img src="http://embargo.grip.org/ban2.jpg" alt="Chicago" style="width:100%;">
       </div>
-    
       <div class="item">
-        <img src="http://embargo.grip.org/ban3.jpg" alt="New york" style="width:100%;">
+        <img src="http://embargo.grip.org/ban4.jpg" alt="New york" style="width:100%;">
         
       </div>
+         <div class="item">
+        <img src="http://embargo.grip.org/ban5.jpg" alt="New york" style="width:100%;">
+        
+      </div>
+          <div class="item">
+        <img src="http://embargo.grip.org/ban7.jpg" alt="New york" style="width:100%;">
+        
+      </div>
+      <div class="item">
+        <img src="http://embargo.grip.org/ban6.jpg" alt="New york" style="width:100%;">
+        
+      </div>
+        
+        
     </div>
 
     <!-- Left and right controls -->
@@ -375,25 +479,24 @@
             
         </div>
         
-  <div  style="text-align:valeur" class="col-md-4">
-  <span class=" fa-stack fa-5x has-badge" data-count="3">
+  <div  style="text-align:center" class="col-md-3">
+  <span class="fa-stack fa-5x has-badge" data-count="3">
     <i class=" fa fa-circle fa-stack-2x"></i>
     <i class="p3 fa fa-database fa-stack-1x fa-inverse" data-count="5"></i>
   </span>
   {% if language.getId() == 'fr' %}
  <p class="text-justify">
     Cette base de données fournit un aperçu le plus actuel possible des régimes d’embargos sur les armes. 
-    L’information contenue  est par conséquent régulièrement mise à jour, vérifiée et enrichie 
  </p>
  {% else %}
  <p class="text-justify">
     This database aims to give an updated snapshot of the arms embargoes’ regimes. 
-    The information contained herein is therefore regularly updated, checked and supplemented.
+   
  </p>
  {% endif %}
   
 </div>
-     <div class="col-md-3">
+ <div  style="border-left: dashed #d5d5d5; text-align:center"  class="col-md-3">
     <span class=" fa-stack fa-5x has-badge" data-count="3">
     <i class=" fa fa-circle fa-stack-2x"></i>
     <i  class="p3 fa fa-book fa-stack-1x fa-inverse" data-count="5"></i>
@@ -409,8 +512,7 @@
   {% endif %}
 </div>
  
-    
-<div class="col-md-4">
+<div   style="border-left: dashed #d5d5d5;text-align:center;" class="col-md-4">
     
   <span class="p1 fa-stack fa-5x has-badge" data-count="3">
     <i class="p2 fa fa-circle fa-stack-2x"></i>
@@ -418,13 +520,11 @@
   </span>
    {% if language.getId() == 'fr' %}
    <p class="text-justify">
-   Les organisations internationales et régionales ayant adopté et / ou mis en œuvre des mesures des embargos sur les armes depuis 2000 sont les suivantes : la Communauté Économique des États d’Afrique de l’Ouest (CEDEAO), la Ligue des États Arabes (LEA), l’Organisation pour la Sécurité 
-   et la Coopération en Europe (OSCE), l’Union européenne (UE) et les Nations unies. 
+   Les organisations ayant mis en œuvre des embargos sur les armes depuis 2000 sont : la Communauté Économique des États d’Afrique de l’Ouest (CEDEAO), la Ligue des États Arabes (LEA), l’Organisation pour la Sécurité et la Coopération en Europe (OSCE), l’Union européenne (UE) et les Nations unies. 
    <p>
     {% else %}     
    <p class="text-justify">
-   Regional or international organisations which have enacted and / or implemented arms embargoes since 2000 are the following : The African Union (AU), The Economic Community of African States (ECOWAS), the European Union (EU), the League of Arab States (LAS), 
-   the Organisation for Security and Cooperation in Europe (OSCE) and the United Nations (UN).   
+   Organisations which have implemented arms embargoes since 2000 are : The African Union (AU), The Economic Community of African States (ECOWAS), the European Union (EU), the League of Arab States (LAS), the Organisation for Security and Cooperation in Europe (OSCE) and the United Nations (UN).  
    </p>
    {% endif %} 
 </div>
@@ -432,7 +532,23 @@
 
 </div>
 
-    <div class="row">
+
+<!-- Icônes à mettre à côté des chiffres, comme dans la Base de données industrie :  
+   drapeau pour les pays ou territoires sous embargo, groupe de personnes pour les entités non-étatiques,
+   plusieurs mains levées pour les organisations multilatérales mettant en œuvre des embargos). -->
+<br>
+<br>
+ 
+
+  
+<br>
+<br>
+
+
+
+
+  
+<div class="row">
         <div class="col-lg-12 ">
            <div class="col-lg-1 ">
                   </div>
@@ -440,17 +556,16 @@
                   <div class="col-lg-11 ">
               
             {% if language.getId() == 'fr' %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Les embargos sur les armes en quelques chiffres :</h1>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Les embargos sur les armes en quelques chiffres </h1>
         {% else %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Key figures on arms embargoes :</h1>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="soustitrehome">Key figures on arms embargoes </h1>
         {% endif %} 
             </div>
         </div>
     </div>
 
-    
-   <!--chiffres embargos-->
-    
+ 
+   
   <div class="col-lg-12">
        
       <div class="col-lg-2"></div>
@@ -460,7 +575,7 @@
  {% if language.getId() == 'fr' %}
     <p>
    <i><h1><b>&nbsp;&nbsp;22</b></h1></i> 
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Nombre d’États ou territoires sous embargo
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nombre d’États ou territoires sous embargo
   </p>
    <p>
        <i>  <h1><b>&nbsp;&nbsp;5</b></h1></i>    
@@ -515,6 +630,102 @@
   
 </div>
 
+</div>
+<div class="row">
+    
+    <div class="col-lg-12">
+       <div  class=" col-md-2">
+       </div>
+        <div style="border: 2px solid #cccccc; background: #efeff5" class=" col-md-2">
+     
+        <div class="tout" >
+            
+           
+           <div class="iconChiffre">
+           <div class="col-lg-12">  
+           <div class="col-lg-6">  
+                    
+               <img src="https://production.grip.org/sites/default/files/quelqueChiffre/icon/pictoentreprise_0_0.png" width="125" height="130" alt="" />      
+            </div>
+                <div class="col-lg-6"> 
+               <div class="chiffres">
+                   <div  style="font-size:24px; color:#246F8C "><i>22</i></div>
+                   <div  style="font-size:15px;" class="title"><i>Nombre d’États ou territoires</i>  </div>
+            </div>
+           </div>
+              
+                </div>
+            
+                
+                </div>
+        </div>
+    </div>
+        <div class=" col-md-1">
+            
+        </div>
+   
+       
+  <div style="border: 2px solid #cccccc; background: #efeff5" class=" col-md-2">
+        <div class="tout" >
+            
+           
+           <div class="iconChiffre">
+           <div class="col-lg-12">  
+           <div class="col-lg-6">  
+                    
+               <img src="https://production.grip.org/sites/default/files/quelqueChiffre/icon/pictoentreprise_0_0.png" width="125" height="130" alt="" />      
+            </div>
+                <div class="col-lg-6"> 
+               <div class="chiffres">
+                   <div  style="font-size:24px; color:#246F8C "><i>5</i></div>
+                  <div  style="font-size:15px;" class="title"><i>Nombre d’entités non-étatiques</i>  </div>
+           
+            </div>
+           </div>
+                </div>
+            
+                
+                </div>
+        </div>
+    </div>
+        <div class=" col-md-1">
+            
+        </div>
+      
+        <div style="border: 2px solid #cccccc; background: #efeff5" class=" col-md-2">
+        <div class="tout" >
+            
+           
+           <div class="iconChiffre">
+           <div class="col-lg-12">  
+           <div class="col-lg-6">  
+                    
+               <img src="https://production.grip.org/sites/default/files/quelqueChiffre/icon/pictoentreprise_0_0.png" width="125" height="130" alt="" />      
+            </div>
+                <div class="col-lg-6"> 
+               <div class="chiffres">
+                   <div  style="font-size:24px; color:#246F8C "><i>6</i></div>
+                   <div  style="font-size:15px;" class="title"><i>Nombre d’organisations <br></i>  </div>
+           
+                
+            </div>
+           </div>
+                </div>
+            
+                
+                </div>
+        </div>
+    </div>
+        <div class=" col-md-2">
+            
+        </div>
+        
+        
+        
+        
+        
+    </div>
+   
 </div>
 </div>
 
@@ -658,8 +869,11 @@
 <!-- Start Footer Ribbon -->
 {% if page.footer_menu %}
     
+    
+    {#
+    //pânel blue panel footer page 
      {% if is_front %}
-    <div style="background-color: #246F8C;" class="panel-body">
+    <!--div style="background-color: #246F8C;" class="panel-body">
          
         <div class="col-lg-12">
         <div style="color: #ffffff;" class="col-lg-4">
@@ -729,7 +943,7 @@
      
   
        
-  
+  //image du footer page
       <div style="color: #ffffff;" class="col-lg-2">
            <!--<div id="communautefr"></div> -->
        <img src="http://embargo.grip.org/unscar_logo.png" >
@@ -776,9 +990,9 @@
         
         </div>-->
     </div>
-        {# This will be a comment #}
-         {% endif  %}
-    <div class="footer-ribbon"><!-- 
+        {# This will be a comment 
+         {% endif  %}#}
+   <!--  <div class="footer-ribbon">
       <div style="background-color: #eee9e9;" class="panel-body">
     
          <div class="row">
@@ -821,7 +1035,7 @@
     
          <div class="row">
          <!-- <p style="color: #246F8C;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contactez le GRIP</p>
-         <a href="https://www.grip.org/fr/" style="color: #246F8C;">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visitez le site du Grip</a>--->
+         <a href="https://www.grip.org/fr/" style="color: #246F8C;">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visitez le site du Grip</a>
          </div>
         
       <div class="row">
@@ -832,7 +1046,7 @@
   
         
   
-         {% if show_social_icon %}
+         {% if show_social_icon %}#
     
         {% endif %}
     
@@ -840,7 +1054,8 @@
         </div>
       </div>
     
-    </div>
+</div> -->
+    
         
       
             
@@ -850,7 +1065,12 @@
 {% endif %}
 <!-- End Footer Ribbon -->
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!-- #footer-bottom -->
 <div id="footer-bottom">
     
@@ -861,10 +1081,10 @@
    {% if language.getId() == 'fr' %} 
       <br>
        
-      <p><i>Les bases de données du Grip</i></p>
-      <p>
+      <p style="text-align: left;" ><i>Les bases de données du Grip</i></p>
+      <p >
     
-      <ul>
+      <ul style="text-align: left;">
           <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://production.grip.org/"> Base de donnée de l'industrie de l'armement en Belgique</a></i></br>
           <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/542" > Production et transferts d’armements dans le monde</a></i></br>
           <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/1029" > Les transferts d'armes de la Belgique </a></i></br>  
@@ -875,13 +1095,13 @@
   {% else %}
      <br>
        
-      <p><i>The databases of the Grip</i></p>
+      <p style="text-align: left;" ><i>GRIP databases</i></p>
       <p>
     
-      <ul>
-          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://production.grip.org/"> Database of the armaments industry in Belgium</a></i></br>
-          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/542" > Global arms production and transfers</a></i></br>
-          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/1029" > Belgium's arms transfers </a></i></br>  
+      <ul style="text-align: left;" >
+          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://production.grip.org/"> Armament industry in Belgium</a></i></br>
+          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/542" > Global arms production </a></i></br>
+          <i><i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/node/1029" > Belgium arms transfers </a></i></br>  
       </ul>  
        </p>
   {% endif %}
@@ -891,13 +1111,25 @@
    {% if language.getId() == 'fr' %} 
        <br>
        
-      <p><i>Contact</i></p>
+      <p style="text-align: left;" ><i>Contact</i></p>
            
-      <ul>
+      <ul style="text-align: left;" >
        <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visitez le site du GRIP</a></i></br>
        <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > Contactez le Grip</a></i></br>
       </ul>
+         <div class="social-media">
+           
+ 
+             
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a style="font-size: 16px;" href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            
+              <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+           
+              <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         
           
+              </div>
+             
              
         
         
@@ -909,51 +1141,64 @@
       
         <br>
        
-      <p><i>Contact</i></p>
+      <p style="text-align: left;" ><i>Contact</i></p>
       <p>
     
-      <ul>
-        <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visit the GRIP website</a></i></br>
-        <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > Contact the Grip</a></i></br>
-      </ul>  
+      <ul style="text-align: left;" >
+        <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visit GRIP website</a></i></br>
+        <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > E-mail GRIP</a></i></br>
+      </ul> 
+          
+    <div class="social-media">
+           
+ 
+             
+              &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a style="font-size: 16px;" href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+            
+              <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+           
+              <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         
+          
+           </div>
        </p>
 
   {% endif %}
-        </div>
-      
-     
-  
-       
-  
+      </div>
+      <br>
+      <p style="text-align: left; color:#ffffff;"> <i>Avec le soutien de la Walonnie et de l'Unscar</i> </p>
       <div style="color: #ffffff;" class="col-lg-2">
+          
            <!--<div id="communautefr"></div> -->
        <img src="http://embargo.grip.org/unscar_logo.png" >
      </div>
-           
-        <div style="color: #ffffff;" class="col-lg-1">
+         
+     <div style="color: #ffffff;" class="col-lg-1">
                 
-      <img src="http://embargo.grip.org/logo_mini.png" >
+     <img src="http://embargo.grip.org/logo_mini.png" >
      
-       </div>
-         <div style="color: #ffffff;" class="col-lg-1">
+     </div>
+       
+     <div style="color: #ffffff;" class="col-lg-1">
                 
      <img src="http://embargo.grip.org/soutien_v_fr.png" >
-       </div> 
+     </div> 
        
-        </div>
+     </div>
  </div>
-       <div style="background-color:#666666;" class="panel-body">
-              <div class="col-lg-12">
-                  <div  style="color: #FFFFFF;"class="col-lg-3">
-                      <i> 467 Chaussée de Louvain B-1030 Bruxelles</i>
+
+    <div style="background-color:#757282;" class="panel-body">
+        <div class="col-lg-12">
+            <div  style="color: #FFFFFF;"class="col-lg-3">
+                <i> 467 Chaussée de Louvain B-1030 Bruxelles</i>
                   
                   </div>
                   
-                    <div  style="color: #FFFFFF;"class="col-lg-5"> 
+                    <div  style="color: #FFFFFF;"class="col-lg-6"> 
                       <i><p class="copyright">© Grip {{ "now"|date("Y") }} - Groupe de recherche et d'information sur la paix et la sécurité </p></i>
   
                   </div>
-                  
+                  <!--
                   <div class=" col-lg-2 social-media">
            
  
@@ -965,7 +1210,7 @@
               <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
          
           
-        </div>
+        </div>-->
        
     
                  <div style="color: #ffffff;" class="col-lg-2"><i> +32 (0)241 80 20</i> </div> 
