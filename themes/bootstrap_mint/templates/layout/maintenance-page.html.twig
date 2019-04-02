@@ -10,8 +10,26 @@
  */
 #}
 <div class="layout-container">
+    <br>
+    <br>
+   
+   <div class="container">
+   {% if logo %}
+   <div class="jumbotron">
+    <img src="{{ logo }}" alt="{{ 'Home'|t }}"/>
+    </br>
+    </br>
 
-  <main role="main" class="maintenance-msg">
+    <p>Groupe de recherche et d'information sur la paix et la sécurité</p> 
+    <p>{{ page.content }}</p>
+   </div>
+     
+  {% endif %}
+  
+ </div>
+  <!--<main role="main" class="maintenance-msg">-->
+      
+    <!--
     <header role="banner">
       {% if logo %}
         <div class="brand logo">
@@ -20,7 +38,7 @@
           </a>
         </div>
       {% endif %}
-
+ 
       {% if site_name or site_slogan %}
         <div class="name-and-slogan">
           {% if site_name %}
@@ -35,16 +53,14 @@
         </div>{# /.name-and-slogan #}
       {% endif %}
 
-    </header>
+    </header> 
     <div class="clearfix">
-      {% if title %}
-        <h1>{{ title }}</h1>
-      {% endif %}
-    <div>
-    {{ page.highlighted }}
+      
+    <div>-->
+   
+{#  {{ page.highlighted }} {{ page.content }} #}
+    
 
-    {{ page.content }}
-
-  </main>
+ <!-- </main>-->
 
 </div>{# /.layout-container #}
