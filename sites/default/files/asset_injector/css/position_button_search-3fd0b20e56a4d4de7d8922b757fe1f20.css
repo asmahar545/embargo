@@ -1,0 +1,4 @@
+.button:first-child, .image-button:first-child {
+    margin-left: 0;
+    margin-right: 0;
+}

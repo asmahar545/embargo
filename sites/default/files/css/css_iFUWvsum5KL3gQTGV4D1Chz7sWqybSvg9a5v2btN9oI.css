@@ -1,0 +1,5 @@
+.field--group-modal-bootstrap-button{background:#246F8C;color:#fff;border:0;line-height:100%;padding:10px;position:absolute;top:100px;left:140px;}
+details > .details-wrapper{padding:0.5em 1.5em;text-align:justify;}p{margin:0 0 20px 0;margin-bottom:20px;text-align:justify;font-size:16px;}
+.button:first-child,.image-button:first-child{margin-left:0;margin-right:0;}
+.form--inline .form-actions{clear:right;}
+input,button,select,textarea{padding:8px;border:1px solid #246F8C;border-radius:18px;}
