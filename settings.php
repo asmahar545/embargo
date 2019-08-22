@@ -769,9 +769,9 @@ $settings['entity_update_batch_size'] = 50;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'grip_embargos',
-  'username' => 'grip_embargo',
-  'password' => 'paix4023embargo',
+  'database' => 'drupal',
+  'username' => 'root',
+  'password' => '',
   'prefix' => '',
   'host' => 'mysql-grip.alwaysdata.net',
   'port' => '3306',
