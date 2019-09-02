@@ -243,7 +243,7 @@
                 <li><a onmouseover="this.style.background = '#0d5178';
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
                                 this.style.color = '#FFFFFF';"style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/node/5">&nbsp;&nbsp;About</a></li>
-                <lsi><a onmouseover="this.style.background = '#0d5178';
+                <li><a onmouseover="this.style.background = '#0d5178';
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
                                 this.style.color = '#FFFFFF';"style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/node/2">&nbsp;&nbsp;Disclaimer</a></li>
 
@@ -1325,6 +1325,7 @@
                     <ul style="text-align: left;" >
                         <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visit GRIP website</a></i></br>
                         <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > E-mail GRIP</a></i></br>
+                        <i><i class="fa fa-calendar"style="font-size:24px" > </i> The last update: {{ node.published_at.value|date('d-m-Y') }}</i>
                     </ul> 
 
                     <div class="social-media">
