@@ -1,5 +1,21 @@
 <?php
+// Force HTTPS
+// PHP_SAPI command line (cli) check prevents drush commands from giving a
+// "Drush command terminated abnormally due to an unrecoverable error"
 
+/*
+if ( (!array_key_exists('HTTPS', $_SERVER)) && (PHP_SAPI !== 'cli') ) {
+  header('HTTP/1.1 301 Moved Permanently');
+  header('Location: https://embargo.grip.org'. $_SERVER['REQUEST_URI']);
+  exit();
+}
+
+// Remove www
+if ($_SERVER['HTTP_HOST'] == 'www.embargo.grip.org') {
+  header('HTTP/1.0 301 Moved Permanently');
+  header('Location: https://embargo.grip.org'. $_SERVER['REQUEST_URI']);
+  exit();
+}*/
 
 // @codingStandardsIgnoreFile
 
@@ -769,7 +785,6 @@ $settings['entity_update_batch_size'] = 50;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-
 $databases['default']['default'] = array (
   'database' => 'drupal',
   'username' => 'root',
@@ -780,13 +795,22 @@ $databases['default']['default'] = array (
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
+
+
+
+
 /*
-$databases['default']['replica'][] = array(
+
+
+$databases['default']['default'] = array (
+  'database' => 'grip_embargos',
+  'username' => 'grip_embargo',
+  'password' => 'paix4023embargo',
+  'prefix' => '',
+  'host' => 'mysql-grip.alwaysdata.net',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
-  'database' => 'drupal',
-  'username' => 'root',
-  'password' => '',
-  'host' => 'localhost',
 );*/
 
 

@@ -207,7 +207,14 @@
                                 this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr">Accueil</a></li>
                 <li><a onmouseover="this.style.background = '#0d5178';
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
-                                this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr/viewslist">Recherche</a></li>
+                                this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/fr/viewslist">Recherche </a></li>
+                <li><a onmouseover="this.style.background = '#0d5178';
+                        this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
+                                this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/carteFr/">Carte</a></li>
+                
+                
+                
+                
                 <li><a onmouseover="this.style.background = '#0d5178';
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
                                 this.style.color = '#FFFFFF';" style="  padding-top: 2em; color: #FFFFFF; font-size: 18px; "href="http://localhost/embargo/fr/node/5">Présentation</a></li>
@@ -240,7 +247,11 @@
                 <li><a onmouseover="this.style.background = '#0d5178';
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
                                 this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/viewslisten">&nbsp;&nbsp;Search</a></li>
+                  <li><a onmouseover="this.style.background = '#0d5178';
+                        this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
+                                this.style.color = '#FFFFFF';" style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/carteEn">&nbsp;&nbsp;Map</a></li>
                 <li><a onmouseover="this.style.background = '#0d5178';
+                    
                         this.style.color = '#FFFFFF';"  onmouseout="this.style.background = '';
                                 this.style.color = '#FFFFFF';"style=" padding-top: 2em; color: #FFFFFF; font-size: 18px; " href="http://localhost/embargo/en/node/5">&nbsp;&nbsp;About</a></li>
                 <li><a onmouseover="this.style.background = '#0d5178';
@@ -327,6 +338,9 @@
 
 <!--Search-->
 {% if is_front and page.search %}
+    {{ page.search }}
+{% endif %}
+{% if is_front and page.content_bottom %}
     {{ page.search }}
 {% endif %}
 <!--End Search-->
@@ -458,6 +472,7 @@
         <!--End Breadcrumbs-->
 
         <div class="row layout">
+          
             <!--- Start Left Sidebar -->
             {% if page.sidebar_first %}
                 <div class = "{{sidebarfirst}} sidebar-first">
@@ -467,8 +482,11 @@
             <!---End Left Sidebar -->
             {% if is_front  %}
                 {% if language.getId() == 'fr' %}
+
                     <h1 class="text-center titrehome">Les embargos sur les armes</h1>
+                    
                 {% else %}
+                     
                     <h1 class="text-center titrehome">The arms embargoes</h1>
 
                 {% endif %}  
@@ -476,10 +494,33 @@
             <!--- Start content -->
 
             {% if page.content %}
+                
                 <div class="{{contentlayout}} content-layout">
+                   
                     {{ page.content }}
-                    {% if is_front  %} 
+                    
+                    {% if is_front  %}
+                     <div class="col-lg-12">
+                 <div  style="text-align:center" >
+                {% if language.getId() == 'fr' %}
 
+                     <i >
+
+                          <i class="fa fa-calendar" style="font-size:18px; "> </i> Dernière mise à jour: {{ node.published_at.value|date('d-m-Y') }}</i>
+                    
+                  
+                {% else %}
+                      <i >
+                           
+                          <i class="fa fa-calendar"style="font-size:18px; " ></i> Last update: {{ node.published_at.value|date('d-m-Y') }}</i>
+                    
+                 </div>
+                 </div>
+                {% endif %}  
+            {% endif %}  
+                   
+                    {% if is_front  %} 
+                    
 
 
                         <div class="col-md-12">
@@ -638,14 +679,14 @@
                                 <br>
                                 <br>
                                 <br>
-                                <div class="text-center col-lg-12">
+                                <div class="col-lg-12">
                                     <br>
                                     <br>
 
-                                    <h1 class="text-center soustitrehome">Les embargos sur les armes en quelques chiffres</h1>
+                                    <h1 class="soustitrehome">Les embargos sur les armes en quelques chiffres</h1>
                                     <br>
                                     <br>
-                                    <div class="col-lg-12">
+                                  <!--  <div class="col-lg-12">
                                         <div  class=" col-lg-2">
                                         </div>
                                         <div style="border: 2px solid #cccccc; background: #efeff5" class=" col-md-2">
@@ -665,7 +706,7 @@
                                                         <div class="col-lg-6">
 
                                                             <div class="chiffres">
-                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>22</i></h1></div>
+                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>22 </i></h1></div>
                                                                 <br>
 
 
@@ -700,7 +741,7 @@
                                                         </div>
                                                         <div class="col-lg-6"> 
                                                             <div class="chiffres">
-                                                                <div style="font-size:24px; color:#246F8C"><h1><i>5</i></h1></div><br>
+                                                                <div style="font-size:24px; color:#246F8C"><h1><i>4</i></h1></div><br>
 
 
                                                             </div>
@@ -730,7 +771,7 @@
                                                         </div>
                                                         <div class="col-lg-6"> 
                                                             <div class="chiffres">
-                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>6&nbsp;&nbsp;<br></i></h1></div>
+                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>4&nbsp;&nbsp;<br></i></h1></div>
 
 
                                                                 <br>
@@ -752,7 +793,7 @@
 
 
 
-                                    </div>
+                                    </div>-->
 
                                     <!--div class="col-lg-4">
                                     <img src="http://embargo.grip.org/pays.jpg" >
@@ -778,7 +819,7 @@
                                     <h1 class="text-center soustitrehome">Key figures on arms embargoes :</h1>
                                     <br>
                                     <br>
-                                    <div class="col-lg-12">
+                                   <!-- <div class="col-lg-12">
                                         <div  class=" col-lg-2">
                                         </div>
                                         <div style="border: 2px solid #cccccc; background: #efeff5" class=" col-md-2">
@@ -825,7 +866,7 @@
                                                         </div>
                                                         <div class="col-lg-6"> 
                                                             <div class="chiffres">
-                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>5</i></h1></div>
+                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>4</i></h1></div>
 
 
                                                             </div>
@@ -858,7 +899,7 @@
                                                         </div>
                                                         <div class="col-lg-6"> 
                                                             <div class="chiffres">
-                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>6&nbsp;&nbsp;</i></h1></div>
+                                                                <div  style="font-size:24px; color:#246F8C "><h1><i>4&nbsp;&nbsp;</i></h1></div>
 
 
 
@@ -889,6 +930,7 @@
 
                             </div>
                         {% endif %}
+                        
                     </div>
 
                     <!--
@@ -930,7 +972,65 @@
             {% endif %}
         {% endif %}
         <!---End content -->
+        
+         {% if language.getId() == 'fr' and not is_front %}
+           
+        <div style="background-color:#efeff1;" class="panel-body">
+        <div class="col-lg-12">
+            
+         <div class="col-lg-4">
+                
+                
+            </div>
+        
+            <div class="col-lg-6">
+                
+                <p> 
+                    
+                     
+                    <p><img src="https://embargo.grip.org/licence.png"> Cette œuvre est mise à disposition selon les 
+                        termes de la Licence Creative Commons :  <br> Attribution - Pas d’Utilisation Commerciale –  
+    Partage dans les Mêmes Conditions 4.0 International
+                   
+                
+                </p>
 
+            </div>  
+
+        </div>
+
+
+    </div>
+         {% endif %}   
+          {% if language.getId() == 'en' and not is_front %}
+        
+    <div style="background-color:#efeff1;" class="panel-body">
+        <div class="col-lg-12">
+            
+         <div class="col-lg-4">
+                
+                
+            </div>
+        
+            <div class="col-lg-6">
+                
+                <p> 
+                    
+                     
+                    <p><img src="https://embargo.grip.org/licence.png"> This work is made available according to the 
+                        terms of the Creative Commons License:  <br> Allocation - No Commercial Use -  
+    Sharing under the same Conditions 4.0 International:
+                   
+                
+                </p>
+
+            </div>  
+
+        </div>
+
+
+    </div>
+     {% endif %}
         <!--- Start Right Sidebar -->
         {% if page.sidebar_second %}
             <div class="{{sidebarsecond}} sidebar-second">
@@ -960,7 +1060,7 @@
 </div>
 </div>
 <!-- End layout -->
-
+ 
 <!-- Start Footer -->
 {% if page.footer_top_one or page.footer_top_two or page.footer_top_three or page.footer_top_four %}
     <div class="footer-widgets">
@@ -1027,7 +1127,7 @@
 {% endif %}
 <!-- End Footer Region-->
 <!--End Footer -->
-
+ 
 <!-- Start Footer Ribbon -->
 {% if page.footer_menu %}
 
@@ -1227,6 +1327,7 @@
 {% endif %}
 <!-- End Footer Ribbon -->
 
+              
 <br>
 <br>
 <br>
@@ -1247,6 +1348,9 @@
 <br>
 
 <!-- #footer-bottom -->
+
+
+
 <div id="footer-bottom">
 
     <div style="background-color: #246F8C;" class="panel-body">
@@ -1293,7 +1397,7 @@
                     <ul style="text-align: left;" >
                         <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visitez le site du GRIP</a></i></br>
                         <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > Contactez le Grip</a></i></br>
-                        <i><i class="fa fa-calendar"style="font-size:24px" > </i> La dernière mise à jour: {{ node.published_at.value|date('d-m-Y') }}</i>
+                        
                      </ul>
                     <div class="social-media">
 
@@ -1325,7 +1429,7 @@
                     <ul style="text-align: left;" >
                         <i><i class="fa fa-globe" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/"> Visit GRIP website</a></i></br>
                         <i><i class="fa fa-envelope" style="font-size:24px"></i><a style="color: #ffffff;" href="https://www.grip.org/fr/contact/contact" > E-mail GRIP</a></i></br>
-                        <i><i class="fa fa-calendar"style="font-size:24px" > </i> The last update: {{ node.published_at.value|date('d-m-Y') }}</i>
+                        
                     </ul> 
 
                     <div class="social-media">
@@ -1380,14 +1484,14 @@
      
 
      
-        <a href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+         <a href="https://www.facebook.com/GRIP.1979"class="icon-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
       
-        <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+         <a href="https://twitter.com/grip_org" class="icon-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
      
-        <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+         <a href="https://www.linkedin.com/company/grip" class="icon-linkedin" data-toggle="tooltip" data-placement="bottom" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
    
     
-  </div>-->
+          </div>-->
 
 
             <div style="color: #ffffff;" class="col-lg-2"><i> +32.2.241.84.20</i> </div> 
@@ -1396,6 +1500,7 @@
 
 
     </div>  
+       
     <br>
     <br>
     <br> 

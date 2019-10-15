@@ -6,8 +6,8 @@ package: 'Bootstrap'
 dependencies:
   - drupal:quicktabs
 
-# Information added by Drupal.org packaging script on 2018-10-18
-version: '8.x-1.0-alpha1'
+# Information added by Drupal.org packaging script on 2019-07-30
+version: '8.x-1.0-alpha2'
 core: '8.x'
 project: 'bootstrap_quicktabs'
-datestamp: 1539898684
+datestamp: 1564507094
